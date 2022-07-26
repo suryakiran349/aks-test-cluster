@@ -14,6 +14,7 @@ resource "azurerm_subnet" "aks-default" {
   address_prefixes     = ["10.10.1.0/24"]
 }
 
+#create a subnet for virtual node
 resource "azurerm_subnet" "aks-aci" {
   name                 = "aci"
   virtual_network_name = azurerm_virtual_network.aksvnet.name
