@@ -48,7 +48,7 @@ variable "windows_admin_password" {
 }
 
 #authorized ip access to the k8s cluster
-variable "Authorized IP ranges" {
+variable "Authorized_IP_ranges" {
   type = string
   default = "40.115.208.134"
   description = "This variable defines the autorizred ip access to the cluster"
