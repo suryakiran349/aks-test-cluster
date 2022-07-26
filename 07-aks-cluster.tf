@@ -42,6 +42,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
     min_count            = 1
     os_disk_size_gb      = 30
     type                 = "VirtualMachineScaleSets"
+    vnet_subnet_id        = azurerm_subnet.aks-default.id
     node_labels = {
       "nodepool-type"    = "system"
       "environment"      = "dev"
@@ -63,10 +64,10 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
 
 # Add On Profiles
  
-    azure_policy_enabled =  true
+ /*   azure_policy_enabled =  true
     oms_agent {
             log_analytics_workspace_id = azurerm_log_analytics_workspace.insights.id
-    }
+    } */
   
 
 # RBAC and Azure AD Integration Block
@@ -94,6 +95,11 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
 # Network Profile
   network_profile {
     network_plugin = "azure"
+  }
+  
+  #virtual default subnet 
+   aci_connector_linux {
+    subnet_name = azurerm_subnet.aks-aci.name
   }
 
   tags = {
